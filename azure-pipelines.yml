@@ -52,6 +52,7 @@ jobs:
       # To record on Cypress dashboard we need to set CYPRESS_RECORD_KEY environment variable
       # environment variable BUILD_BUILDNUMBER is a good candidate
       - script: |
+          echo "agent"
           npx print-env AGENT
           echo "agent"
           npx print-env BUILD
