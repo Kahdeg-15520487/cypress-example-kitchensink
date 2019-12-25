@@ -8,8 +8,7 @@ jobs:
 
   # Job names can contain alphanumeric characters and '_', cannot start with a number
   - job: Cypress_e2e_tests
-    pool:
-      vmImage: 'ubuntu-latest'
+    pool: Self-hosted Windows for E2E Test
     strategy:
       parallel: 2
     steps:
