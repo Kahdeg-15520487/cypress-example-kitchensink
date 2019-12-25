@@ -11,6 +11,8 @@ jobs:
     pool: Self-hosted Windows for E2E Test
     strategy:
       parallel: 2
+    variables:
+      CACHE_FOLDER: $(Pipeline.Workspace)/cache
     steps:
       - task: NodeTool@0
         inputs:
@@ -27,13 +29,13 @@ jobs:
       - task: CacheBeta@1
         inputs:
           key: npm | $(Agent.OS) | package-lock.json
-          path: /home/vsts/.npm
+          path: $(CACHE_FOLDER)/.npm
           restoreKeys: npm | $(Agent.OS) | package-lock.json
         displayName: Cache NPM packages
       - task: CacheBeta@1
         inputs:
           key: cypress | $(Agent.OS) | package-lock.json
-          path: /home/vsts/.cache/Cypress
+          path: $(CACHE_FOLDER)/Cypress
           restoreKeys: cypress | $(Agent.OS) | package-lock.json
         displayName: Cache Cypress binary
 
