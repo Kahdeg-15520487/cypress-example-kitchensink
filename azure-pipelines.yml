@@ -11,7 +11,7 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     strategy:
-      parallel: 10
+      parallel: 2
     steps:
       - task: NodeTool@0
         inputs:
