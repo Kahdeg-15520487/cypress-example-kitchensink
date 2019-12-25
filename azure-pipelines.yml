@@ -12,7 +12,8 @@ jobs:
     strategy:
       parallel: 2
     variables:
-      CACHE_FOLDER: $(Pipeline.Workspace)/cache
+      NPM_CACHE_FOLDER: $(Pipeline.Workspace)/cache/.npm
+      CYPRESS_CACHE_FOLDER: $(Pipeline.Workspace)/cache/Cypress
     steps:
       - task: NodeTool@0
         inputs:
@@ -29,13 +30,13 @@ jobs:
       - task: CacheBeta@1
         inputs:
           key: npm | $(Agent.OS) | package-lock.json
-          path: $(CACHE_FOLDER)/.npm
+          path: $(NPM_CACHE_FOLDER)
           restoreKeys: npm | $(Agent.OS) | package-lock.json
         displayName: Cache NPM packages
       - task: CacheBeta@1
         inputs:
           key: cypress | $(Agent.OS) | package-lock.json
-          path: $(CACHE_FOLDER)/Cypress
+          path: $(CYPRESS_CACHE_FOLDER)
           restoreKeys: cypress | $(Agent.OS) | package-lock.json
         displayName: Cache Cypress binary
 
@@ -52,6 +53,7 @@ jobs:
       # environment variable BUILD_BUILDNUMBER is a good candidate
       - script: |
           npx print-env AGENT
+          echo "agent"
           npx print-env BUILD
           npx print-env SYSTEM
           npm run start:ci:windows &
