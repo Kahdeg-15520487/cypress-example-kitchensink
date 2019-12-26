@@ -51,12 +51,16 @@ jobs:
       # The test artifacts (video, screenshots, test output) will be uploaded to Cypress dashboard
       # To record on Cypress dashboard we need to set CYPRESS_RECORD_KEY environment variable
       # environment variable BUILD_BUILDNUMBER is a good candidate
-      - script: |
-          echo "agent"
-          npx print-env AGENT
-          echo "agent"
-          npx print-env BUILD
-          npx print-env SYSTEM
+      - script: npx print-env AGENT
+        displayName: 'Print env variable AGENT'
+
+      - script: npx print-env BUILD
+        displayName: 'Print env variable AGENT'
+
+      - script: npx print-env SYSTEM
+        displayName: 'Print env variable AGENT'
+ 
+      - script:
           npm run start:ci:windows &
           npx cypress run --record --key 5d655e9b-ef5c-4b2f-8fef-6a6bdb5d6f8d --parallel --ci-build-id $BUILD_BUILDNUMBER --group "Azure CI"
         displayName: 'Run Cypress tests'
