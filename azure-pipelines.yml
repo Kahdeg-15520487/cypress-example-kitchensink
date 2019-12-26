@@ -41,8 +41,11 @@ jobs:
       #  displayName: Cache Cypress binary
 
       # Install Node dependencies
-      - script: npm ci
+      - script: npm install
         displayName: 'Install NPM dependencies'
+        
+      - script: npm install --only=dev
+        displayName: 'Install NPM dev dependencies'
 
       - script: npm run cy:verify
         displayName: 'Cypress verify'
@@ -55,10 +58,10 @@ jobs:
         displayName: 'Print env variable AGENT'
 
       - script: npx print-env BUILD
-        displayName: 'Print env variable AGENT'
+        displayName: 'Print env variable BUILD'
 
       - script: npx print-env SYSTEM
-        displayName: 'Print env variable AGENT'
+        displayName: 'Print env variable SYSTEM'
  
       - script: |
           npm run start:ci:windows &
