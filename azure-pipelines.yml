@@ -63,9 +63,7 @@ jobs:
       - script: npx print-env SYSTEM
         displayName: 'Print env variable SYSTEM'
  
-      - script: |
-          npm run start:ci:windows &
-          npx cypress run --record --key 5d655e9b-ef5c-4b2f-8fef-6a6bdb5d6f8d --parallel --ci-build-id $BUILD_BUILDNUMBER --group "Azure CI"
+      - script: npx run-p -rln "start:ci:windows" "e2e:ci:chrome:parallel"
         displayName: 'Run Cypress tests'
         env:
           # avoid warnings about terminal
