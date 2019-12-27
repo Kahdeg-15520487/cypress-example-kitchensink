@@ -63,8 +63,8 @@ jobs:
       - script: npx print-env SYSTEM
         displayName: 'Print env variable SYSTEM'
  
-      - script: npx run-p -rln "start:ci:windows" "e2e:ci:chrome:parallel"
-        displayName: 'Run Cypress tests'
+      - script: npx run-p -rln "start:ci:windows" "e2e:chrome:parallel"
+        displayName: 'Run Cypress tests- Chrome open'
         env:
           # avoid warnings about terminal
           TERM: xterm
